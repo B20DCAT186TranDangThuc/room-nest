@@ -1,0 +1,56 @@
+<div class="container">
+    <nz-breadcrumb>
+        <nz-breadcrumb-item>
+            <a routerLink="/admin/dashboard">Dashboard</a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>User</nz-breadcrumb-item>
+    </nz-breadcrumb>
+
+    <div class="action-box">
+        <div class="search-box">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input type="text" nz-input placeholder="Input text..." />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+                <button nz-button nzType="primary" nzSearch><span nz-icon nzType="search"></span></button>
+            </ng-template>
+        </div>
+        <div class="create">
+            <button nz-button nzSize="default" nzType="primary">
+                <span nz-icon nzType="user-add" nzTheme="outline"></span>
+                Add User
+            </button>
+        </div>
+    </div>
+
+    <nz-table nzShowSizeChanger [nzData]="listOfUser" [nzFrontPagination]="false" [nzLoading]="loading"
+        [nzTotal]="total" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event)">
+        <thead>
+            <tr>
+                <th [width]="50"></th>
+                <th>Full Name</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th [width]="150">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of listOfUser">
+                <td>
+                    <nz-avatar nzIcon="user" [nzSrc]="data.imageUrl"></nz-avatar>
+                </td>
+                <td>{{data.firstName}} {{data.lastName}}</td>
+                <td>{{ data.role }}</td>
+                <td>{{ data.email }}</td>
+                <td class="action">
+                    <button nz-button nzSize="large" nzType="default">
+                        <span nz-icon nzType="eye" nzTheme="outline"></span>
+                    </button>
+                    <button nz-button nzSize="large" nzType="default">
+                        <span nz-icon nzType="setting" nzTheme="outline"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

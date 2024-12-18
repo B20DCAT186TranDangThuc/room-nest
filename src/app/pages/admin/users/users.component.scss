@@ -1,0 +1,31 @@
+.action-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    .search-box {
+        width: 40%;
+        display: flex;
+
+        nz-select {
+            margin-left: 4px;
+            min-width: 150px;
+        }
+    }
+}
+
+nz-table {
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    thead {
+        background-color: #299be4;
+    }
+
+    tbody tr .action {
+        display: flex;
+        justify-content: space-around;
+    }
+}
