@@ -1,0 +1,40 @@
+<!-- Sticky header -->
+<header class="header-outer">
+    <div class="header-inner responsive-wrapper">
+        <div class="header-logo">
+            <a href="">
+                <img src="https://assets.codepen.io/285131/acme-2.svg" />
+            </a>
+        </div>
+        <nav class="header-navigation" *ngIf="!isAdminLoggedIn && !isCustomerLoggedIn">
+            <a nz-button nzType="link" routerLink="/register" routerLinkActive="active">Sign Up</a>
+            <a nz-button nzType="link" routerLink="/login" routerLinkActive="active">Login</a>
+            <button>Menu</button>
+        </nav>
+        <nav class="header-navigation" *ngIf="isCustomerLoggedIn">
+            <a nz-button nzType="link" routerLink="/" routerLinkActive="active">Home</a>
+            <a nz-button nzType="link" routerLink="/register" routerLinkActive="active">About</a>
+            <button>Menu</button>
+        </nav>
+        <nav class="header-navigation" *ngIf="isAdminLoggedIn">
+            <a nz-button nzType="link" routerLink="/" routerLinkActive="active">Home</a>
+            <button>Menu</button>
+        </nav>
+        <div class="account-info" *ngIf="isAdminLoggedIn || isCustomerLoggedIn">
+            <span>Hi, <strong>{{nameAccount}}</strong></span>
+            <a class="circle" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+                <nz-avatar nzIcon="user" [nzSrc]="imageUrl"></nz-avatar>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu>
+                    <li nz-menu-item>
+                        <a nz-button nzType="text" routerLink="/" routerLinkActive="active">Account</a>
+                    </li>
+                    <li nz-menu-item>
+                        <a nz-button nzType="primary" (click)="logout()" routerLinkActive="active">Logout</a>
+                    </li>
+                </ul>
+            </nz-dropdown-menu>
+        </div>
+    </div>
+</header>

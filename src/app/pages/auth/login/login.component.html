@@ -1,0 +1,35 @@
+<div class="tabs">
+    <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip="Working..">
+        <div class="tabs__header">
+            <button class="tabs__tab tabs__tab--active">Login</button>
+            <button class="tabs__tab" routerLink="/register">Register</button>
+        </div>
+        <div class="tabs__content">
+            <h2 class="tabs__title">Login to Your Account</h2>
+            <p class="tabs__description">Welcome back! Please enter your credentials to access your account.</p>
+            <form class="tabs__form" nz-form [formGroup]="loginForm">
+                <div class="tabs__form-group">
+                    <label for="email" class="tabs__label">E-mail</label>
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback nzErrorTip="Please input your E-mail">
+                            <nz-input-group style="padding: 8px;" nzPrefixIcon="user" nzSize="large">
+                                <input type="text" nz-input placeholder="Email" formControlName="email" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="tabs__form-group">
+                    <label for="password" class="tabs__label">Password</label>
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback nzErrorTip="Please input your password">
+                            <nz-input-group style="padding: 8px;" nzPrefixIcon="lock" nzSize="large">
+                                <input nz-input placeholder="Password" type="password" formControlName="password" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <button nz-button [disabled]="loginForm.invalid" (click)="login()">Log in</button>
+            </form>
+        </div>
+    </nz-spin>
+</div>

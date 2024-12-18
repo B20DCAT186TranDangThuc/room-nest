@@ -1,0 +1,19 @@
+<nav class="sidebar-navigation" *ngIf="isAdminLoggedIn">
+    <ul>
+        <li nz-button nzType="link" routerLink="/admin/users" routerLinkActive="active"
+            [class.active]="selectedNav =='user'" nz-icon nzType="user" theme="outline" style="width: 100%;"
+            (click)="changeSelectNav('user')">
+            <span class="tooltip">User</span>
+        </li>
+        <li nz-icon nzType="book" theme="outline" style="width: 100%;" [class.active]="selectedNav =='role'"
+            (click)="changeSelectNav('role')">
+
+            <span class="tooltip">Role</span>
+        </li>
+        <li nz-icon nzType="contacts" theme="outline" style="width: 100%;" [class.active]="selectedNav =='permission'"
+            (click)="changeSelectNav('permission')">
+
+            <span class="tooltip">Permission</span>
+        </li>
+    </ul>
+</nav>
