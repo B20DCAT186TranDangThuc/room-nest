@@ -17,7 +17,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
-import { AuthInterceptor } from './interfaces/auth.interceptor';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 registerLocaleData(en);
 

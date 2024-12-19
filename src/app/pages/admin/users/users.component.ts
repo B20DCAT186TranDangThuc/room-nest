@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { AdminService } from 'src/app/services/admin.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -14,7 +15,9 @@ export class UsersComponent {
   loading = false;
   pageIndex: number = 0;
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.fetchData(this.pageIndex);
@@ -28,9 +31,16 @@ export class UsersComponent {
         ...user,
         role: user.role.role
       }));
-      console.log(this.listOfUser);
+      console.log(document.cookie.includes("refresh_token"));
 
       this.total = res.meta.total;
+    })
+  }
+
+  testRefresh() {
+    this.authService.refreshAccessToken().subscribe((res) => {
+      console.log(res);
+
     })
   }
 
