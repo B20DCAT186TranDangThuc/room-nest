@@ -12,6 +12,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzModalModule } from "ng-zorro-antd/modal";
 @NgModule({
     exports: [
         NzLayoutModule,
@@ -27,7 +28,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
         NzMenuModule,
         NzBreadCrumbModule,
         NzTableModule,
-        NzAvatarModule
+        NzAvatarModule,
+        NzModalModule
     ]
 })
 

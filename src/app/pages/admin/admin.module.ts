@@ -4,16 +4,19 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UsersComponent } from './users/users.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AddUserComponent } from './users/add-user/add-user.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AdminDashboardComponent,
     UsersComponent,
-    AddUserComponent
+    AddUserComponent,
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

@@ -54,7 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
               this.message.warning("Phiên đăng nhập đã hết hạn! vui lòng đăng nhập lại", { nzDuration: 2000 });
               this.authService.logout();
             } else {
-              this.message.error("Lỗi hệ thông!", { nzDuration: 2000 });
+              this.message.error(err.error, { nzDuration: 2000 });
             }
           }
 
