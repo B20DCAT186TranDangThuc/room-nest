@@ -14,4 +14,8 @@ export class AdminService {
     getAllUser(): Observable<any> {
         return this.http.get(BASE_URL + "/users");
     }
+
+    createUser(body: any): Observable<any> {
+        return this.http.post(BASE_URL + "/users", body);
+    }
 }
