@@ -18,4 +18,15 @@ export class AdminService {
     createUser(body: any): Observable<any> {
         return this.http.post(BASE_URL + "/users", body);
     }
+    updateUser(body: any): Observable<any> {
+        return this.http.put(BASE_URL + "/users", body);
+    }
+
+    getUserById(id: any): Observable<any> {
+        return this.http.get(BASE_URL + "/users/" + id);
+    }
+
+    deleteUserById(id: any): Observable<any> {
+        return this.http.delete(BASE_URL + "/users/" + id);
+    }
 }

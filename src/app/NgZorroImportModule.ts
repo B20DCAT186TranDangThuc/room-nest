@@ -13,6 +13,11 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzModalModule } from "ng-zorro-antd/modal";
+import { NzDropDownModule } from "ng-zorro-antd/dropdown";
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 @NgModule({
     exports: [
         NzLayoutModule,
@@ -29,7 +34,12 @@ import { NzModalModule } from "ng-zorro-antd/modal";
         NzBreadCrumbModule,
         NzTableModule,
         NzAvatarModule,
-        NzModalModule
+        NzModalModule,
+        NzDropDownModule,
+        NzDrawerModule,
+        NzDividerModule,
+        NzDescriptionsModule,
+        NzPopconfirmModule
     ]
 })
 

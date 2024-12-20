@@ -21,7 +21,8 @@ export class AuthInterceptor implements HttpInterceptor {
     private router: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = StorageService.getToken();
+    const token = JSON.parse(StorageService.getToken());
+
     if (token) {
       let headers = new HttpHeaders().set(
         'Authorization',
@@ -37,6 +38,7 @@ export class AuthInterceptor implements HttpInterceptor {
       }
       request = request.clone({
         headers,
+        withCredentials: true,
       });
     }
 
@@ -44,8 +46,6 @@ export class AuthInterceptor implements HttpInterceptor {
       tap(
         (event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
-            console.log(event);
-
           }
         },
         (err: any) => {
