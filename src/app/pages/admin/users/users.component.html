@@ -17,15 +17,14 @@
         </div>
         <div class="create">
             <button nz-button nzSize="default" nzType="primary"
-                (click)="createTplModal(tplTitle, tplContent, tplFooter)">
+                (click)="createTplModal(tplTitle, tplContent, tplFooter, '01')">
                 <span nz-icon nzType="user-add" nzTheme="outline"></span>
                 Add User
             </button>
         </div>
     </div>
 
-    <nz-table nzShowSizeChanger [nzData]="listOfUser" [nzFrontPagination]="false" [nzLoading]="loading"
-        [nzTotal]="total" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event)">
+    <nz-table #basicTable [nzData]="listOfUser" [nzBordered]="true" [nzSize]="'middle'" [nzNoResult]="'noResultTpl'">
         <thead>
             <tr>
                 <th [width]="50"></th>
@@ -44,12 +43,20 @@
                 <td>{{ data.role }}</td>
                 <td>{{ data.email }}</td>
                 <td class="action">
-                    <button nz-button nzSize="large" nzType="default">
+                    <button nz-button nzSize="small" nzType="default" (click)="open(data)">
                         <span nz-icon nzType="eye" nzTheme="outline"></span>
                     </button>
-                    <button nz-button nzSize="large" nzType="default">
-                        <span nz-icon nzType="setting" nzTheme="outline"></span>
+                    <button nz-button nzSize="small" nzType="default"
+                        (click)="createTplModal(tplTitle, tplContent, tplFooter, '02', data)">
+                        <span nz-icon nzType="edit" nzTheme="outline"></span>
                     </button>
+                    <button nz-button nzSize="small" nzType="default" nz-popconfirm
+                        nzPopconfirmTitle="Are you sure delete this task?" (nzOnConfirm)="deleteUser(data)"
+                        (nzOnCancel)="cancelDelete()" nzPopconfirmPlacement="bottomRight" [nzOkText]="'Xóa'"
+                        [nzBeforeConfirm]="beforeConfirmDelete">
+                        <span nz-icon nzType="delete" nzTheme="outline"></span>
+                    </button>
+
                 </td>
             </tr>
         </tbody>
@@ -57,7 +64,8 @@
 </div>
 
 <ng-template #tplTitle>
-    <span>Add User</span>
+    <span *ngIf="updateOrAdd === '01'">Add User</span>
+    <span *ngIf="updateOrAdd === '02'">Update User</span>
 </ng-template>
 <form class="tabs__form" nz-form [formGroup]="userForm">
     <ng-template #tplContent>
@@ -128,10 +136,57 @@
         <!-- Footer -->
         <div class="tabs__form-footer">
             <button nz-button (click)="onCancel(ref)">Cancel</button>
-            <button nz-button nzType="primary" [nzLoading]="tplModalButtonLoading" (click)="onSubmit(ref)"
-                [disabled]="userForm.invalid">
+            <button *ngIf="updateOrAdd==='01'" nz-button nzType="primary" [nzLoading]="tplModalButtonLoading"
+                (click)="onAddUser(ref)" [disabled]="userForm.invalid">
                 Create
+            </button>
+            <button *ngIf="updateOrAdd==='02'" nz-button nzType="primary" [nzLoading]="tplModalButtonLoading"
+                (click)="onUpdateUser(ref)" [disabled]="userForm.invalid">
+                Update
             </button>
         </div>
     </ng-template>
 </form>
+
+<nz-drawer [nzVisible]="visible" [nzWidth]="640" [nzClosable]="false" (nzOnClose)="close()">
+    <ng-container *nzDrawerContent>
+        <h3>Thông tin người dùng</h3>
+        <nz-descriptions [nzColumn]="2" nzTitle="Avatar">
+            <nz-descriptions-item [nzSpan]="2">
+                <div style="width: 100%; display: flex; justify-content: center;">
+                    <nz-avatar nzIcon="user" [nzSrc]="userDetail.imageUrl" [nzSize]="200"></nz-avatar>
+                </div>
+            </nz-descriptions-item>
+        </nz-descriptions>
+        <nz-divider></nz-divider>
+        <nz-descriptions [nzColumn]="2" nzTitle="Personal">
+            <nz-descriptions-item nzTitle="Full Name" [nzSpan]="1">{{userDetail.firstName}}
+                {{userDetail.lastName}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Email" [nzSpan]="1">{{userDetail.email}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Role">
+                <span>{{userDetail.role}}</span>
+            </nz-descriptions-item>
+        </nz-descriptions>
+        <nz-divider></nz-divider>
+        <nz-descriptions [nzColumn]="2" nzTitle="Permission">
+
+            <nz-descriptions-item nzTitle="List Permission">
+                <table border="1">
+                    <tr>
+                        <th>Module</th>
+                        <th>Name</th>
+                        <th>API</th>
+                        <th>Method</th>
+                    </tr>
+                    <tr *ngFor="let item of userDetail.permissions">
+                        <td>{{item.module}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.apiPath}}</td>
+                        <td>{{item.method}}</td>
+                    </tr>
+                </table>
+
+            </nz-descriptions-item>
+        </nz-descriptions>
+    </ng-container>
+</nz-drawer>

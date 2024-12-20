@@ -41,6 +41,9 @@ export class LoginComponent {
         }
         StorageService.saveUser(user);
         StorageService.saveToken(res.access_token);
+        this.authService.login(this.loginForm.value).subscribe(res => {
+
+        });
         this.message.success("Đăng nhập thành công", { nzDuration: 2000 });
         if (StorageService.isAdminLoggedIn()) {
           this.router.navigateByUrl("/admin/dashboard");
@@ -61,5 +64,12 @@ export class LoginComponent {
       }
     })
 
+  }
+
+  refreshCookie() {
+    this.authService.refreshToken().subscribe((res => {
+      console.log(res);
+
+    }))
   }
 }

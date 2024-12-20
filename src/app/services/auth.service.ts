@@ -16,7 +16,7 @@ export class AuthService {
   ) { }
 
   register(registerForm: any): Observable<any> {
-    return this.http.post(BASE_URL + "/auth/register", registerForm);
+    return this.http.get(BASE_URL + "/auth/register", registerForm);
   }
 
   getAvatarUser(idUser: number): Observable<any> {
@@ -27,7 +27,7 @@ export class AuthService {
     return this.http.post(BASE_URL + "/auth/login", loginRequest);
   }
 
-  refreshAccessToken(): Observable<any> {
+  refreshToken(): Observable<any> {
     return this.http.get(BASE_URL + "/auth/refresh");
   }
 
